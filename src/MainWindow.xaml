@@ -1,0 +1,86 @@
+﻿<controls:MetroWindow
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+	xmlns:cal="http://www.caliburnproject.org"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+	mc:Ignorable="d"
+	x:Class="SoftwaresAnalyze.MainWindow"
+	SnapsToDevicePixels="True"
+	FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+	Title="{Binding DisplayName, Mode=OneTime}" Height="550" Width="425"
+	WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="56" />
+            <RowDefinition Height="15" />
+        </Grid.RowDefinitions>
+        <Grid Grid.RowSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Background="{StaticResource Primary}">
+                <Grid Margin="10 5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="25"/>
+                    </Grid.ColumnDefinitions>
+                    <Viewbox Width="25" Height="25" Margin="0,0,-2,0">
+                        <Canvas Width="20" Height="20">
+                            <Path Data="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" Fill="{StaticResource TextIcon}"
+                              Height="20" Stretch="Fill" Width="20" />
+                        </Canvas>
+                    </Viewbox>
+                    <TextBox Grid.Column="2" wpf:HintAssist.Hint="Search"
+				        VerticalAlignment="Center" Foreground="{DynamicResource TextIcon}" 
+                        Style="{DynamicResource TextBoxSearch}" Height="25"
+                        Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                    <Label Content="{Binding Count, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                           Grid.Column="3" Foreground="{StaticResource TextIcon}"
+                           FontSize="10"
+                           VerticalAlignment="Center" Padding="1" HorizontalAlignment="Center"/>
+                </Grid>
+            </Grid>
+            <ListBox Style="{StaticResource MaterialDesignListBox}"
+			         ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+			         ItemsSource="{Binding AppList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+			         ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="1">
+                <!--<ListBoxItem Content="VisualStudio 2013" Tag="Microsoft"
+                             Style="{DynamicResource ListBoxItemStyle}" />
+                <ListBoxItem Content="Microsoft Office 2015" Tag="Microsoft"
+                             Style="{StaticResource MaterialDesignListBoxItem}" />-->
+            </ListBox>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="56" />
+                <ColumnDefinition Width="15" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+			        IsEnabled="{Binding IsEnableVisiable, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+			        cal:Message.Attach="[Event Click]=[Action Analizing()]">
+                <Viewbox Width="24" Height="24">
+                    <Canvas Width="24" Height="24">
+                        <Path
+							Data="M13,4.07V1L8.45,5.55L13,10V6.09C15.84,6.57 18,9.03 18,12C18,14.97 15.84,17.43 13,17.91V19.93C16.95,19.44 20,16.08 20,12C20,7.92 16.95,4.56 13,4.07M7.1,18.32C8.26,19.22 9.61,19.76 11,19.93V17.9C10.13,17.75 9.29,17.41 8.54,16.87L7.1,18.32M6.09,13H4.07C4.24,14.39 4.79,15.73 5.69,16.89L7.1,15.47C6.58,14.72 6.23,13.88 6.09,13M7.11,8.53L5.7,7.11C4.8,8.27 4.24,9.61 4.07,11H6.09C6.23,10.13 6.58,9.28 7.11,8.53Z"
+							Fill="{StaticResource TextIcon}" />
+                    </Canvas>
+                </Viewbox>
+            </Button>
+            <!--<ProgressBar x:Name="Progress" Grid.Column="1" Margin="-3"
+			             Visibility="{Binding IsAnalizing, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+			             Foreground="{StaticResource Pink}"
+			             Style="{StaticResource MaterialDesignCircularProgressBar}"
+                         Background="{x:Null}"
+			             Width="Auto" Height="Auto" IsIndeterminate="True" />-->
+        </Grid>
+    </Grid>
+</controls:MetroWindow>
